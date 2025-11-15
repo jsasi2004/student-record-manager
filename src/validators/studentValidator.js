@@ -5,7 +5,7 @@ const studentSchema = Joi.object({
   lastName: Joi.string().max(100).required(),
   email: Joi.string().email().required(),
   course: Joi.string().max(100).required(),
-  marks: Joi.number().min(0).max(100).required()
+  marks: Joi.number().min(0).max(100).required(),
 });
 
 module.exports = studentSchema;

@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
 const path = require('path');
+const expressLayouts = require('express-ejs-layouts');
 
 const studentRoutes = require('./routes/studentRoutes');
 
@@ -23,7 +24,7 @@ app.use(cookieParser());
 app.use(session({
   secret: process.env.SESSION_SECRET || 'dev-secret',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
 }));
 app.use(flash());
 app.use((req, res, next) => {
@@ -33,9 +34,9 @@ app.use((req, res, next) => {
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-const expressLayouts = require('express-ejs-layouts');
+
 app.use(expressLayouts);
-app.set('layout', 'layout');  // default layout file
+app.set('layout', 'layout'); // default layout file
 
 app.use('/public', express.static(path.join(__dirname, '..', 'public')));
 
