@@ -24,8 +24,11 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Run tests
-        run: npm test
+      - name: Run test with secret env vars
+        env:
+          MONGODB_URI_TEST: ${{ secrets.MONGODB_URI_TEST }}
+        run: |
+          npm test
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
