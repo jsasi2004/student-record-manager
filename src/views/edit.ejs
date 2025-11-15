@@ -1,0 +1,14 @@
+<section>
+  <h2>Edit Student</h2>
+  <% if (errors && errors.length) { %>
+    <ul class="errors"><% errors.forEach((err) => { %><li><%= err %></li><% }) %></ul>
+  <% } %>
+  <form action="/students/<%= student._id %>" method="post">
+    <label>First name <input name="firstName" value="<%= student.firstName %>" required /></label>
+    <label>Last name <input name="lastName" value="<%= student.lastName %>" required /></label>
+    <label>Email <input name="email" value="<%= student.email %>" type="email" required /></label>
+    <label>Course <input name="course" value="<%= student.course %>" required /></label>
+    <label>Marks <input name="marks" value="<%= student.marks %>" type="number" min="0" max="100" required /></label>
+    <button type="submit">Update</button>
+  </form>
+</section>

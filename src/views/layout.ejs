@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Student Record Manager</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/public/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Student Record Manager</h1>
+    <nav><a href="/">Home</a> | <a href="/students/new">Add Student</a></nav>
+  </header>
+  <main>
+    <% if (messages.error) { %>
+      <div class="flash error"><%= messages.error %></div>
+    <% } %>
+    <% if (messages.success) { %>
+      <div class="flash success"><%= messages.success %></div>
+    <% } %>
+    <%- body %>
+  </main>
+  <footer>
+    <small>Cloud DevOpsSec Project</small>
+  </footer>
+</body>
+</html>

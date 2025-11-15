@@ -1,0 +1,48 @@
+name: CI and Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v6
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      # - name: Snyk test (optional)
+      #   if: secrets.SNYK_TOKEN != ''
+      #   uses: snyk/actions@master
+      #   with:
+      #     args: test
+      #   env:
+      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      # - name: Deploy to Render
+      #   if: github.ref == 'refs/heads/main'
+      #   uses: render-examples/deploy@v1
+      #   with:
+      #     apiKey: ${{ secrets.RENDER_API_KEY }}
+      #     serviceId: ${{ secrets.RENDER_SERVICE_ID }}
